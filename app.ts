@@ -389,32 +389,32 @@ import './LibrarianExtension'
 //#region async/await
 
 
-function getBooksbyCategory(cat: Category): Promise<string[]>{
+// function getBooksbyCategory(cat: Category): Promise<string[]>{
 
-    let p: Promise<string[]> = new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-            let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
-            if(foundBooks.length>0){
-                resolve(foundBooks)
-            }
-            else{
-                reject('No books found for that category')
-            }
-        }, 2000);
-    });
+//     let p: Promise<string[]> = new Promise((resolve, reject)=>{
+//         setTimeout(()=>{
+//             let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
+//             if(foundBooks.length>0){
+//                 resolve(foundBooks)
+//             }
+//             else{
+//                 reject('No books found for that category')
+//             }
+//         }, 2000);
+//     });
 
-    return p;
-}
+//     return p;
+// }
 
-async function logSearchResults(bookCategory: Category){
-    let foundBooks = await getBooksbyCategory(bookCategory);
+// async function logSearchResults(bookCategory: Category){
+//     let foundBooks = await getBooksbyCategory(bookCategory);
 
-    console.log(foundBooks);
-}
+//     console.log(foundBooks);
+// }
 
-console.log("Beggining search...");
-logSearchResults(Category.Biography).catch(err=> console.log(err));
-console.log("search submitted...");
+// console.log("Beggining search...");
+// logSearchResults(Category.Biography).catch(err=> console.log(err));
+// console.log("search submitted...");
 
 //#endregion
 

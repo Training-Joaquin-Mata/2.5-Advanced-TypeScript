@@ -40,7 +40,7 @@ class UniversityLibrarian implements Interfaces.Librarian, Employee, Researcher 
         console.log(this.name + ' is assisting ' + custName);
     }
 
-    @writable(true)
+    // @writable(true)
     assistFaculty() {
         console.log('Assisting faculty.');
     }
@@ -62,7 +62,7 @@ export class PublicLibrarian implements Interfaces.Librarian {
         console.log('Assisting customer.');
     }
 
-    @writable(false)
+    // @writable(false)
     teachCommunity() {
         console.log('Teaching community.');
     }

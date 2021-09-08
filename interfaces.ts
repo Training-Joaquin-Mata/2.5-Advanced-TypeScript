@@ -9,10 +9,10 @@ interface Book {
     pages?: number;
     markDamaged?: DamageLogger;
 }
-interface Book{
-    publisher: string;
-    hasIndex: boolean;
-}
+// interface Book{
+//     publisher: string;
+//     hasIndex: boolean;
+// }
 interface DamageLogger {
     (reason: string): void;
 }

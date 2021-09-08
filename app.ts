@@ -297,24 +297,128 @@ import './LibrarianExtension'
 
 //#region Creating and using method decorators
 
-let lib1 = new UniversityLibrarian(); 
-let lib2 = new PublicLibrarian(); 
+// let lib1 = new UniversityLibrarian(); 
+// let lib2 = new PublicLibrarian(); 
 
-try {
-	lib1.assistFaculty = () => console.log('assistFaculty replacement method');
-    lib2.teachCommunity = () => console.log('teachCommunity replacement method');    
-} catch (error) {
-    console.log(error.message);
+// try {
+// 	lib1.assistFaculty = () => console.log('assistFaculty replacement method');
+//     lib2.teachCommunity = () => console.log('teachCommunity replacement method');    
+// } catch (error) {
+//     console.log(error.message);
+// }
+
+// lib1.assistFaculty();
+// lib2.teachCommunity();
+
+//#endregion
+
+//#endregion
+
+//#region Module 6 Asynchronous patterns
+
+//#region  Using callbacks with asynchronous code
+
+// interface LibraryMgrCallback{
+//     (err: Error, titles: string[]): void;
+// }
+
+// function getBooksbyCategory(cat: Category, callback: LibraryMgrCallback): void{
+//         setTimeout(()=>{
+//             try{
+//                 let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
+//                 if(foundBooks.length>0){
+//                     callback(null, foundBooks);
+//                 }
+//                 else{
+//                     throw new Error('No Books Found');
+//                 }
+//             }catch(error){
+//                 callback(error, null);
+//             }
+//         }, 2000);
+// }
+
+// function logCategorySearch(err:Error, titles: string[]): void{
+//     if(err){
+//         console.log(`${err.name}: ${err.message}`);
+//     }
+//     else{
+//         console.log(`Found the following titles: ${titles}`);
+//     }
+// }
+
+
+// console.log("Beggining search...");
+// getBooksbyCategory(Category.Biography, logCategorySearch);
+// setTimeout(()=>{
+//     console.log("search submitted...");
+// }, 3000)
+
+//#endregion
+
+//#region Promise
+
+// function getBooksbyCategory(cat: Category): Promise<string[]>{
+
+//         let p: Promise<string[]> = new Promise((resolve, reject)=>{
+//             setTimeout(()=>{
+//                 let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
+//                 if(foundBooks.length>0){
+//                     resolve(foundBooks)
+//                 }
+//                 else{
+//                     reject('No books found for that category')
+//                 }
+//             }, 2000);
+//         });
+
+//         return p;
+// }
+
+// console.log("Beggining search...");
+// getBooksbyCategory(Category.Biography)
+// .then(titles=> {console.log(`Found Titles: ${titles}`)
+//  return titles.length}, reason=>{return 0;})
+//  .then(num => {console.log(`Number of found books: ${num}`);} )
+// .catch(reason=> console.log(reason))
+// console.log("search submitted...");
+
+
+//#endregion
+
+//#region async/await
+
+
+function getBooksbyCategory(cat: Category): Promise<string[]>{
+
+    let p: Promise<string[]> = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
+            if(foundBooks.length>0){
+                resolve(foundBooks)
+            }
+            else{
+                reject('No books found for that category')
+            }
+        }, 2000);
+    });
+
+    return p;
 }
 
-lib1.assistFaculty();
-lib2.teachCommunity();
+async function logSearchResults(bookCategory: Category){
+    let foundBooks = await getBooksbyCategory(bookCategory);
+
+    console.log(foundBooks);
+}
+
+console.log("Beggining search...");
+logSearchResults(Category.Biography).catch(err=> console.log(err));
+console.log("search submitted...");
 
 //#endregion
 
 //#endregion
-
-
 
 
 

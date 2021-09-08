@@ -1,23 +1,29 @@
 "use strict";
-function sealed(constructor) {
-    console.log('sealing the constructor');
-    Object.seal(constructor);
-    Object.seal(constructor.prototype);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.writable = exports.logger = exports.sealed = void 0;
+function sealed(name) {
+    return function (target) {
+        console.log(`Sealing the constructor ${name}`);
+        Object.seal(target);
+        Object.seal(target.prototype);
+    };
 }
 exports.sealed = sealed;
 function logger(target) {
-    console.log('in the logger');
-    var newConstructor = function () {
-        target.apply(this);
-        console.log('logging in the new constructor');
+    let newConstructor = function () {
+        console.log(`Creating new instance:`);
+        console.log(target);
     };
     newConstructor.prototype = Object.create(target.prototype);
     newConstructor.prototype.constructor = target;
     return newConstructor;
 }
 exports.logger = logger;
-function methodLogger(target, propertyKey, descriptor) {
-    console.log("Property name: " + propertyKey);
-    console.log(descriptor.value);
+function writable(isWritable) {
+    return function (target, propertyKey, descriptor) {
+        console.log(`Setting ${propertyKey}.`);
+        descriptor.writable = isWritable;
+    };
 }
-exports.methodLogger = methodLogger;
+exports.writable = writable;
+//# sourceMappingURL=decorators.js.map

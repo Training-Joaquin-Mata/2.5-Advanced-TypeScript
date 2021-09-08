@@ -133,7 +133,7 @@ import './LibrarianExtension'
 
 //#endregion
 
-
+//#region Module 4 Using Advanced Type Features
 
 //#region Creating a Fluent API with Polymorphic this type
 
@@ -249,33 +249,72 @@ import './LibrarianExtension'
 //#endregion
 
 //#region Symbols
-let mySymbol = Symbol('first_symbol');
-let anotherSymbol = Symbol('first_symbol');
+// let mySymbol = Symbol('first_symbol');
+// let anotherSymbol = Symbol('first_symbol');
 
-// console.log(mySymbol === anotherSymbol);
-// console.log(typeof mySymbol);
+// // console.log(mySymbol === anotherSymbol);
+// // console.log(typeof mySymbol);
 
-let myObject = {
-    [mySymbol]: 'value for my symbol key'
-}
+// let myObject = {
+//     [mySymbol]: 'value for my symbol key'
+// }
 
-// console.log(myObject[mySymbol]);
+// // console.log(myObject[mySymbol]);
 
 
-let librarian = new UniversityLibrarian();
-// librarian[CLASS_INFO]();
+// let librarian = new UniversityLibrarian();
+// // librarian[CLASS_INFO]();
 
-let libraryCustomer = {
-    name: 'Thorne',
-    assistCustomer: (custName: string) => console.log(`Assisting ${custName}`)
-}
+// let libraryCustomer = {
+//     name: 'Thorne',
+//     assistCustomer: (custName: string) => console.log(`Assisting ${custName}`)
+// }
 
-if (libraryCustomer instanceof UniversityLibrarian) {
-    console.log('A helpful librarian.');
-}
-else {
-    console.log('Not a librarian.');
-}
+// if (libraryCustomer instanceof UniversityLibrarian) {
+//     console.log('A helpful librarian.');
+// }
+// else {
+//     console.log('Not a librarian.');
+// }
 //#endregion
+
+//#endregion
+
+//#region Module 5 Creating and using Decorators
+
+//#region Creating and using class decorators
+
+// let lib1 = new UniversityLibrarian();
+// //The other changes are in decorators.ts, on the sealed decorator
+// //and on the top of the UniversityLibrarian class in the classes.ts 
+
+
+//#endregion
+
+//#region Creating class decorators that replace contructor functions
+// let lib2 = new PublicLibrarian();  
+//#endregion
+
+//#region Creating and using method decorators
+
+let lib1 = new UniversityLibrarian(); 
+let lib2 = new PublicLibrarian(); 
+
+try {
+	lib1.assistFaculty = () => console.log('assistFaculty replacement method');
+    lib2.teachCommunity = () => console.log('teachCommunity replacement method');    
+} catch (error) {
+    console.log(error.message);
+}
+
+lib1.assistFaculty();
+lib2.teachCommunity();
+
+//#endregion
+
+//#endregion
+
+
+
 
 
